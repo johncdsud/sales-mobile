@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+    <title>Sales Mobile 1.0</title>
+    <link rel="stylesheet" href="/css/fontawesome-all.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <div class="container-fluid formulario">
+        <div class="form-group row">
+            <div class="col-md-4">
+            </div>
+            <h2 style="border-bottom: 1px #c5c5c5 solid;">Condições de Pagamento</h2>
+        </div>
+    </div>
+    <style>
+        table#condpagtabela thead {
+            position: fixed;
+
+        }
+    </style>
+
+    <div style="overflow: auto " class="container-fluid">
+
+
+
+    </div>
+    <table class="table table-striped table-dark table-sm" style="overflow: auto; width: 1370px; height: 10px">
+
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Cod</th>
+            <th>Dias</th>
+            <th>Altera</th>
+            <th>Deleta</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+    </table>
+    </div>
+    <div style="overflow: auto; width: 320px; height: 460px; border:solid 1px " class="container-fluid">
+        <table class="table table-striped table-bordered" id="condpagtabela">
+            <tbody>
+                <% for (condpag of condpag){%>
+
+                <tr>
+                    <td>
+                        <%= condpag.condpag_codigo%>
+                    </td>
+                    <td>
+                        <%= condpag.condpag_descricao%>
+                    </td>
+                    <td><a class="btn btn-warning" href=<%="/condpag/" + condpag.condpag_codigo%>>Alterar</a> </td>
+                    <td><a class="btn btn-danger" href=<%="/condpag/excluir/" + condpag.condpag_codigo%>>Deletar</a>
+                    </td>
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/js/bootstrap.js"></script>
+</body>
+
+</html>

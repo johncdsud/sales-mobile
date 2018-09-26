@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+    <title>Sales Mobile 1.0</title>
+    <link rel="stylesheet" href="/css/fontawesome-all.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<style>
+    body {
+            background-color: #E0F2F7;
+        }
+    </style>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div id="form-container">
+        <div class="container-fluid formulario" id="form-box">
+            <form action="login.ejs" method="post">
+                <h1 class="text-center">Login</h1>
+
+                <div class="form-group">
+                    <label class="sr-only" for="login">Usuário</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </div>
+                        <input type="text" name="usuario" class="form-control" placeholder="Seu login de usuário">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="sr-only" for="senha">Senha</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </div>
+                        <input type="password" name="senha" class="form-control" placeholder="Digite sua senha">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Entrar" class="btn btn-success form-control">
+                </div>
+
+                <div class="form-group">
+                    Não é registrado? <a href="login.ejs">Crie uma conta</a>.
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/bootstrap.js"></script>
+</body>
+
+</html>
