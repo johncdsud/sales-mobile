@@ -1,5 +1,5 @@
 var mysql = require("mysql")
-var database = 'SALES'; //Nome do Seu banco de dados
+var database = process.env.MYSQL_DATABASE || 'SALES'; //Nome do Seu banco de dados
 
 
 
@@ -11,6 +11,6 @@ var client = mysql.createConnection({
 });
 
 // colocar o banco de dados em uso - ativo
-client.query('USE ' + process.env.MYSQL_DATABASE || database);
+client.query('USE ' + database);
 
 module.exports = client;
