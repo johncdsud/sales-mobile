@@ -1,16 +1,6 @@
 version: '2'
 
 services:
-    mysql:
-        image: mysql:5.7.23
-        environment:
-            - MYSQL_USER=root
-            - MYSQL_ROOT_PASSWORD=1234
-#            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-            - MYSQL_DATABASE=SALES
-        ports:
-            - 3306:3306
-        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
 
     sales-mobile:
         image: node:9.0.0
@@ -27,4 +17,17 @@ services:
             - "3000:3000"
         expose:
             - "3000"
+        links:
+            - mysql
         command: bash -c "npm install && node app.js"
+        
+    mysql:
+        image: mysql:5.7.23
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ROOT_PASSWORD=1234
+#            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=SALES
+        ports:
+            - 3306:3306
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
