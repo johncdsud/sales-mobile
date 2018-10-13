@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body style="overflow: hidden;">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div class="container-fluid formulario">
+
+        <div class="form-group row" style="display: flex;justify-content: center">
+            <h1 style="border-bottom: 1px #c5c5c5 solid; display: flex;justify-content: center">Alterar Grade</h1>
+        </div>
+
+            <div class="form-group row">
+                <div class="col-md-4">
+                </div>
+
+                <div class="col-md-4">
+                    <h3 style="display:flex; justify-content: center">Descrição</h3>
+                    <input type="text" maxlength="200" class="form-control" id="descricao" minlength="2" name="grade_descricao"
+                    value="<%= grade[0].grade_descricao%>">
+                    <hr>
+                </div>
+
+                <div class="col-md-4"></div>
+                <div class="col-md-12" style="border-radius:2px">
+                    <h4 style="display:flex; justify-content: center">Numerações</h4>
+                    <hr>
+                </div>
+                <div class="col-md-12" style="display:flex; justify-content: center">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao1" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[0].grade_tamanho%>">
+                        </div>
+                        <div class="col-md-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao2" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[1].grade_tamanho%>">
+                        </div>
+
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao3" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[2].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao4" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[3].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao5" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[4].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao6" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[5].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao7" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[6].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao8" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[7].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao9" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[8].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao10" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[9].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao11" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[10].grade_tamanho%>">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" maxlength="2" class="form-control" id="numeracao12" name="grade_numeracao"
+                                style="max-width: 45px" value="<%= grade[11].grade_tamanho%>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="row" style="display:flex;justify-content:center">
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btn-block" onclick="alterarGrade(); altGrade();">Salvar Grade </button>
+        </div>
+
+        <div class="col-md-1 ">
+            <a class="btn btn-secondary btn-block" href="/grade">Voltar</a>
+        </div>
+
+    </div>
+    </div>
+
+    <script src="/js/bootstrap/bootstrap.js"></script>
+    <script src="/js/grade/alterarGrade.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <div class="container-fluid formulario">
+        <div class="form-group row">
+            <div class="col-md-5">
+            </div>
+            <h2 style="border-bottom: 1px #c5c5c5 solid;">Pedido de Venda</h2>
+        </div>
+        <form action="/pedidoGlobal/novo" method="post">
+            <div class="form-group row" style="display: flex;justify-content: center">
+                
+                <div class="col-md-2">
+                    <label for="pedGlobal_data">Data Pedido</label>
+                    <input type="date" class="form-control" id="pedGlobal_data" name="pedGlobal_data" value="<%=moment().format('YYYY-MM-DD')%>"
+                    onchange="alteraDataVencimento()">
+                </div>
+                <div class="col-md-3">
+                    <label for="pessoa_codigo">Cliente</label>
+                    <select class="form-control custom-select" name="pessoa_codigo" id="pessoa_codigo">
+                        <% for (cli of clientepf){%>
+                        <option value="<%= cli.pessoa_codigo%>">
+                            <%= cli.pessoa_nome_raz%>
+                        </option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <label for="condpag_codigo">Cond Pag</label>
+                    <select class="form-control custom-select" name="condpag_codigo" id="condpag_codigo" onchange="alteraDataVencimento()">
+                        <% for (cond of condpag){%>
+                        <option value="<%=cond.condpag_codigo%>" id="dias_codigo">
+                            <%= cond.condpag_descricao%>
+                        </option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="pedGlobal_venc">Vencimento</label>
+                    <input type="date" class="form-control" id="pedGlobal_venc" name="pedGlobal_venc" value="<%=moment().format('YYYY-MM-DD')%>" readonly>
+                </div>
+                
+            </div>
+
+            <div class="form-group row" style="display: flex;justify-content: center">
+                
+                <div class="col-md-3">
+                    <label for="prod_codigo">Produto</label>
+                    <select class="form-control custom-select" name="prod_codigo" id="prod_codigo">
+                        <% for (prod of produto){%>
+                        <option value="<%= prod.prod_codigo%>" id="codigo-produto-<%= prod.prod_codigo%>">
+                            <%= prod.prod_nome%>
+                        </option>
+                        <%}%>
+                    </select>
+                </div>
+
+
+                <div class="col-md-1">
+                    <label for="qtdePedGlobal">Estoque</label>
+                    <input type="number" class="form-control" id="qtdePedGlobal" name="qtdePedGlobal" placeholder="000"
+                        disabled>
+                </div>
+                <div class="col-md-1">
+                    <label for="vendaPed">Qtde Venda</label>
+                    <input type="number" class="form-control" id="vendaPed" name="vendaPed" placeholder="000">
+                </div>
+                <div class="col-md-1">
+                    <label for="unitarioPedGlobal">R$ Unitário</label>
+                    <input type="money" class="form-control" id="unitarioPedGlobal" name="unitarioPedGlobal"
+                        placeholder="R$0.00">
+
+                </div>
+                <div class="col-md-1">
+                    <label for="totalPedGlobal">R$ Total </label>
+                    <input type="number" class="form-control" id="totalPedGlobal" name="totalPedGlobal" placeholder="R$0.00" readonly>
+                </div>
+            </div>
+            <div class="form-group row" style="display: flex;justify-content: center">
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-primary btn-block" onclick="incluirItem()">Incluir</button>
+                </div>
+
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-success btn-block" onclick="salvarPedGlobal()">Salvar</button>
+                </div>
+                
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-warning btn-block" onclick="imprimirPedGlobal()">Imprimir</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="container-fluid formulario">
+            <div class="form-group row">
+                <div class="col-md-5">
+                </div>
+
+            </div>
+        </div>
+
+        <div style="overflow: auto; width: 920px; height: 330px; border: 1px" class="container-fluid">
+            <table class="table table-striped table-ligth table-bordered" id="pedglobaltabela">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Qtde Venda</th>
+                        <th>R$ Unitário</th>
+                        <th>R$ SubTotal</th>
+                        <th>Deleta</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-pedGlobal">
+                </tbody>
+                </thead>
+            </table>
+        </div>
+
+        <script src="/js/bootstrap/bootstrap.js"></script>
+        <script src="/js/moment/moment.js"></script>
+        <script src="/js/pedidoGlobal/novoPedidoGlobal.js"></script>
+
+</body>
+
+</html>

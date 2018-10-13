@@ -12,7 +12,7 @@ module.exports = {
 }
 
 function buscarUsuario(callback) {
-    client.query(`SELECT * FROM ${tabela}`, callback);
+    client.query(`SELECT * FROM ${tabela} order by user_nome`, callback);
 }
 function novoUsuario(req, res) {
     res.render('../app/views/novoUsuario.ejs');

@@ -14,12 +14,13 @@ module.exports = {
 function buscarEstoqueSaida(req, res) {
     model.buscarEstoqueSaida((err, data) => {
         if (err)
-            return res.json(err);
+            return res.status(500).json(err);
+            
         data.forEach((item) => {
             item.movest_dataent = moment(item.movest_dataent).format("DD/MM/YYYY");
         });
 
-        res.render('../app/views/estoqueSaida.ejs', { movestoque: data });
+        res.render('../app/views/estoqueSaida/estoqueSaida.ejs', { movestoque: data });
     });
 }
 
@@ -27,7 +28,7 @@ function buscarEstoqueSaidaPorId(req, res) {
     model.buscarEstoqueSaidaPorId(req.params.codigo, (err, data) => {
         if (err)
             return res.json(err);
-        produto.buscarProduto((err, produtos) => {
+        produto.buscarProduto(null,(err, produtos) => {
             if (err)
                 return res.json(err);
 
@@ -36,16 +37,17 @@ function buscarEstoqueSaidaPorId(req, res) {
                 item.movest_dataent = moment(item.movest_dataent).format("DD/MM/YYYY");
             });
 
-            res.render('../app/views/alteraEstoqueSaida.ejs', { movestoque: data, produto: produtos });
+            res.render('../app/views/aestoqueSaida/lteraEstoqueSaida.ejs', { movestoque: data, produto: produtos });
         });
     });
 }
 
 function novoEstoqueSaida(req, res) {
-    produto.buscarProduto((err, data) => {
+    produto.buscarProduto(null, (err, data) => {
         if (err)
             return res.json(err);
-        res.render('../app/views/novoEstoqueSaida.ejs', { produto: data });
+            
+        res.render('../app/views/estoqueSaida/novoEstoqueSaida.ejs', { produto: data });
     });
 }
 

@@ -2,6 +2,18 @@ version: '2'
 
 services:
 
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        container_name: nginx-proxy
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - "/etc/nginx/vhost.d"
+            - "/usr/share/nginx/html"
+            - "/var/run/docker.sock:/tmp/docker.sock:ro"
+            - "/etc/nginx/certs"
+
     sales-mobile:
         image: node:9.0.0
         volumes:
@@ -9,8 +21,11 @@ services:
         environment:
             - MYSQL_USER=root
             - MYSQL_HOST=mysql
+            - MYSQL_PASSWORD=1234
             - MYSQL_PORT=3306
             - MYSQL_DATABASE=SALES
+            - VIRTUAL_HOST=www.salesmobile.tk, salesmobile.tk
+            - VIRTUAL_PORT=80,443
         working_dir: /deploy
         ports:
             - "3000:3000"

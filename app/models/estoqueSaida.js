@@ -9,12 +9,17 @@ module.exports = {
     buscarEstoqueSaidaPorId,
     cadastrarEstoqueSaida,
     alterarEstoqueSaida,
-    deletarEstoqueSaida
+    deletarEstoqueSaida,
+    buscarEstoqueSaidaPorIdProduto
 }
 
+
 function buscarEstoqueSaida(callback) {
-    client.query(`SELECT * FROM MOVESTOQUE` ,callback);  
-    
+    client.query(`SELECT * FROM ${tabela1} WHERE movest_motivo IS NOT NULL order by movest_dataent`, callback);
+}
+
+function buscarEstoqueSaidaPorIdProduto(idProduto, callback) {
+    client.query(`SELECT * FROM ITEMESTOQUE i INNER JOIN MOVESTOQUE mov ON i.movest_codigo = mov.movest_codigo WHERE movest_motivo is NOT NULL AND i.prod_codigo = ${idProduto}`, callback);
 }
 
 function novoEstoqueSaida(req, res) {

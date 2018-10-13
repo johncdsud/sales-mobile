@@ -13,7 +13,7 @@ function buscarClientepf(req, res) {
     model.buscarClientepf((err, data) =>{
         if (err) 
             return res.json(err);
-        res.render('../app/views/clientepf.ejs', { clientepf: data});
+        res.render('../app/views/clientepf/clientepf.ejs', { clientepf: data});
     })
 }
 
@@ -21,7 +21,7 @@ function buscarClientepfPorId(req, res) {
     model.buscarClientepfPorId(req.params.codigo, (err, data) =>{
         if (err) 
             return res.json(err);
-        res.render('../app/views/alteraClientepf.ejs', { pf: data[0]});
+        res.render('../app/views/clientepf/alteraClientepf.ejs', { pf: data[0]});
     })
 }
 
@@ -29,7 +29,7 @@ function novoClientepf(req, res) {
     model.buscarClientepf((err,data) => {
         if (err)
             return res.json(err);
-         res.render('../app/views/novoClientepf.ejs',{clientepf: data});
+         res.render('../app/views/clientepf/novoClientepf.ejs',{clientepf: data});
     });
 }
 

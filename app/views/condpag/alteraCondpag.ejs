@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+    
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <div class="container-fluid">
+        <form action="/condpag/alterar/<%= condpag.condpag_codigo%>" method="post">
+            <div class="form-group row" style="display: flex;justify-content: center">
+
+                <h2 style="border-bottom: 1px #c5c5c5 solid;">Alterar Condição de Pagamento</h2>
+            </div>
+            <div class="form-group row" style="display: flex;justify-content: center">
+
+                <div class="col-md-1">
+                    <label for="condpag">Codigo</label>
+                    <input type="number" maxlength="20" value="<%= condpag.condpag_codigo%>" name="condpag_codigo"
+                        class="form-control" id="cod" readonly>
+                </div>
+                <div class="col-md-1">
+                    <label for="condpag">Dias</label>
+                    <input type="text" maxlength="20" value="<%= condpag.condpag_descricao%>" name="condpag_descricao"
+                        class="form-control" id="descricao" placeholder="00">
+                </div>
+            </div>
+    </div>
+    <br>
+
+    <div class="form-group row" style="display: flex;justify-content: center">
+
+
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary btn-block" style="width: 100px" padding-right=3 0px>Salvar</button>
+        </div>
+        <div>
+            <div class="col-md-1">
+                <a class="btn btn-secondary btn-block" href="/condPag" style="width: 100px">Voltar</a>
+            </div>
+        </div>
+        </form>
+    </div>
+    <script src="/js/bootstrap/bootstrap.js"></script>
+</body>
+
+</html>

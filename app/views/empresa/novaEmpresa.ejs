@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+    <title>Nova Empresa</title>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <form action="/empresa/nova" method="post">
+        <div class="container-fluid formulario">
+            <div class="form-group row" style="display: flex;justify-content: center">
+                <h2 style="border-bottom: 1px #c5c5c5 solid;">Nova Empresa</h2>
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+            
+            <div class="col-md-4">
+                <label for="empresa">Razão Social</label>
+                <input type="text" maxlength="100"  name="emp_razao" class="form-control " id="razao "
+                    placeholder="Informe a razão social ">
+            </div>
+            <div class="col-md-3 ">
+                <label for="empresa ">Nome Fantasia</label>
+                <input type="text " maxlength="50 "  name="emp_fantasia" class="form-control "
+                    id="fantasia" placeholder="Digite o nome fantasia ">
+            </div>
+
+            <div class="col-md-2 ">
+                <label for="empresa ">CEP</label>
+                <input type="number " maxlength="50"  name="emp_cep" class="form-control " id="cep"
+                    placeholder="Informe o CEP ">
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+            <div class="col-md-2 ">
+                <label for="empresa ">Cidade</label>
+                <select class="form-control custom-select "  name="emp_cidade" id="cidade ">
+                    <% include ../partials/cidades %>
+                </select>
+            </div>
+            <div class="col-md-2 ">
+                <label for="empresa ">Bairro</label>
+                <input type="text " maxlength="50 "  name="emp_bairro" class="form-control "
+                    id="bairro" placeholder="Informe o Bairro ">
+            </div>
+            <div class="col-md-4 ">
+                <label for="empresa ">Endereço</label>
+                <input type="text " maxlength="50"  name="emp_end" class="form-control " id="endereco"
+                    placeholder="Digite o Endereço ">
+            </div>
+            <div class="col-md-1 ">
+                <label for="empresa ">Numero</label>
+                <input type="number " maxlength="5" name="emp_num" class="form-control " id="num"
+                    placeholder="Numero ">
+            </div>
+        </div>
+
+        <div class="form-group row" style="display: flex;justify-content: center">
+            <div class="col-md-1 ">
+                <label for="empresa ">Estado</label>
+                <select class="form-control custom-select "  name="emp_estado" id="estado ">
+                    <% include ../partials/estado %>
+                </select>
+            </div>
+            <div class="col-md-2 ">
+                <label for="empresa ">CNPJ</label>
+                <input type="text" maxlength="30"  name="emp_cnpj" class="form-control " id="cnpj"
+                    placeholder="Informe o CNPJ ">
+            </div>
+            <div class="col-md-2 ">
+                <label for="empresa ">Inscrição Estadual</label>
+                <input type="number " maxlength="30" name="emp_inscEst" class="form-control "
+                    id="inscricao" placeholder="Iscrição">
+            </div>
+            <div class="col-md-2 ">
+                <label for="empresa ">Telefone</label>
+                <input type="tel " maxlength="30 " name="emp_fone" class="form-control " id="fone"
+                    placeholder="Informe o telefone ">
+            </div>
+            <div class="col-md-2 ">
+                <label for="empresa ">Celular</label>
+                <input type="tel " maxlength="30 "  name="emp_celular" class="form-control "
+                    id="celular" placeholder="Informe o celular ">
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+            <div class="col-md-2">
+                <label for="empresa ">E-mail</label>
+                <input type="email " maxlength="50 "  name="emp_email" class="form-control "
+                    id="email" placeholder="Informe o e-mail ">
+            </div>
+            <div class="col-md-3 ">
+                <label for="empresa ">Banco</label>
+                <select class="form-control custom-select "name="emp_banco" id="banco ">
+                    <% include ../partials/bancos %>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="empresa ">Agência</label>
+                <input type="number " maxlength="50 "  name="emp_agencia" class="form-control "
+                    id="agencia" placeholder="Agência ">
+            </div>
+            <div class="col-md-2    ">
+                <label for="empresa ">Conta</label>
+                <input type="number " maxlength="50 "  name="emp_conta" class="form-control "
+                    id="conta" placeholder="Conta">
+            </div>
+        </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+
+            <div class="col-md-3">
+                <label for="empresa ">Favorecido</label>
+                <input type="text " maxlength="50 "  name="emp_favorecido" class="form-control"
+                    id="favorecido" placeholder="Informe o favorecido">
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary btn-block">Salvar </button>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-secondary btn-block" href="/empresa">Voltar</a>
+            </div>
+        </div>
+
+    </form>
+
+    <script src="/js/bootstrap/bootstrap.js"></script>
+</body>
+
+</html>

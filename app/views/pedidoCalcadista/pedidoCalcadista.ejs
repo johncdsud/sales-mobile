@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div class="container-fluid formulario">
+        <div class="form-group row">
+            <div class="col-md-5">
+            </div>
+            <h4 style="border-bottom: 3px #c5c5c5 solid;">Pedidos</h4>
+        </div>
+    </div>
+    <div style="overflow: auto; width: 800px; " class="container-fluid">
+        <table class="table table-striped table-dark table-sm">
+            <tr>
+                <th>N°</th>
+                <th>Cliente</th>
+                <th>Data Pedido</th>
+                <th>Altera</th>
+                <th>Deleta</th>
+            </tr>
+            </thead>
+        </table>
+        </table>
+    </div>
+
+
+    <div style="overflow: auto; width: 800px; height: 460px; border:solid 1px " class="container-fluid">
+        <table class="table table-striped">
+
+            </thead>
+            <thead>
+                <thead>
+                <tbody>
+                    <% for (pedidoCalcadista of pedidoCalcadista){%>
+
+                    <td>
+                        <%= pedidoCalcadista.pedcalc_codigo%>
+                    </td>
+                    <td>
+                        <%= pedidoCalcadista.pessoa_nome_raz%>
+                    </td>
+                    <td>
+                        <%= moment(pedidoCalcadista.dataped).format('DD/MM/YYYY')%>
+                    </td>
+                    <td><a class="btn btn-warning" href=<%="/pedidoCalcadista/" + pedidoCalcadista.pedcalc_codigo%>>Alterar</a> </td>
+                    <td><a class="btn btn-danger" href=<%="/pedidoCalcadista/excluir/" + pedidoCalcadista.pedcalc_codigo%>>Deletar</a>
+                    </td>
+                    </tr>
+                    <%}%>
+                </tbody>
+        </table>
+    </div>
+
+    <script src="/js/bootstrap/bootstrap.js"></script>
+</body>
+
+</html>

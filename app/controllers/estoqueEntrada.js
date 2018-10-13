@@ -19,7 +19,7 @@ function buscarEstoqueEntrada(req, res) {
             item.movest_dataent = moment(item.movest_dataent).format("DD/MM/YYYY");
         });
 
-        res.render('../app/views/estoqueEntrada.ejs', { movestoque: data });
+        res.render('../app/views/estoqueEntrada/estoqueEntrada.ejs', { movestoque: data });
     });
 }
 
@@ -28,7 +28,7 @@ function buscarEstoqueEntradaPorId(req, res) {
         if (err)
             return res.json(err);
 
-        produto.buscarProduto((err, produtos) => {
+        produto.buscarProduto(null,(err, produtos) => {
             if (err)
                 return res.json(err);
 
@@ -37,16 +37,17 @@ function buscarEstoqueEntradaPorId(req, res) {
                 item.movest_dataent = moment(item.movest_dataent).format("DD/MM/YYYY");
             });
 
-            res.render('../app/views/alteraEstoqueEntrada.ejs', { movestoque: data, produto: produtos });
+            res.render('../app/views/estoqueEntrada/alteraEstoqueEntrada.ejs', { movestoque: data, produto: produtos });
         });
     });
 }
 
 function novoEstoqueEntrada(req, res) {
-    produto.buscarProduto((err, data) => {
+    produto.buscarProduto(null,(err, data) => {
         if (err)
             return res.json(err);
-        res.render('../app/views/novoEstoqueEntrada.ejs', { produto: data });
+            
+        res.render('../app/views/estoqueEntrada/novoEstoqueEntrada.ejs', { produto: data });
     });
 }
 

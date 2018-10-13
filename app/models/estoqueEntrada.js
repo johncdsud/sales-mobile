@@ -9,23 +9,25 @@ module.exports = {
     buscarEstoqueEntradaPorId,
     cadastrarEstoqueEntrada,
     alterarEstoqueEntrada,
-    deletarEstoqueEntrada
+    deletarEstoqueEntrada,
+    buscarEstoqueEntradaPorIdProduto
 }
 
 function buscarEstoqueEntrada(callback) {
-    client.query(`SELECT * FROM MOVESTOQUE`, callback);
+    client.query(`SELECT * FROM ${tabela1}  WHERE movest_motivo is NULL order by movest_dataent`, callback);
+}
 
+function buscarEstoqueEntradaPorIdProduto(idProduto, callback) {
+    client.query(`SELECT * FROM ITEMESTOQUE i INNER JOIN MOVESTOQUE mov ON i.movest_codigo = mov.movest_codigo WHERE movest_motivo is NULL AND i.prod_codigo = ${idProduto}`, callback);
 }
 
 function novoEstoqueEntrada(req, res) {
     res.render('../app/views/novoEstoqueEntrada.ejs');
 }
 
-function buscarEstoqueEntradaPorId(id, callback) {
+function buscarEstoqueEntradaPorId(id, callback) {   
     client.query(`SELECT * FROM ${tabela1} mov LEFT JOIN ${tabela2} item ON mov.movest_codigo = item.movest_codigo LEFT JOIN PRODUTO p ON p.prod_codigo = item.prod_codigo WHERE mov.movest_codigo = ${id}`, callback);
 }
-
-
 async function cadastrarEstoqueEntrada(movest) {
     return new Promise((resolve, reject) => {
         var mysql = `INSERT INTO MOVESTOQUE(movest_dataent, movest_pedido) VALUES('${movest.dataMovimento}', '${movest.numeroPedido}');`;
@@ -44,7 +46,7 @@ async function cadastrarEstoqueEntrada(movest) {
     });
 }
 
-function alterarEstoqueEntrada(id, MOVESTOQUE) {
+function alterarEstoqueEntrada(id, MOVESTOQUE, callback) {
     return new Promise((resolve, reject) => {
         var mysql = `UPDATE  ${tabela1} SET movest_dataent ='${MOVESTOQUE.movest_dataent}, movest_pedido ='${MOVESTOQUE.movest_pedido}' WHERE movest_codigo = ${id}`;
         client.query(mysql, (err) => {

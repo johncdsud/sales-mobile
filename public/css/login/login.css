@@ -1,0 +1,38 @@
+body {
+    background-color: rgb(67, 108, 241);
+}
+
+.container {
+    margin-top: 140px;
+}
+
+.title-login {
+    display:flex;
+    justify-content:center;
+    color:#007bff;
+    font-size:65px;
+}
+
+.form-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    /* background-color:#007bff; */
+    background-color: #E0F2F7;
+}
+
+.login-response {
+    color: red;
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+.button-login {
+    display: block;
+    margin: auto;
+    background-color: #007bff;
+}
+    /* background-color: rgb(67, 108, 241); } */

@@ -12,7 +12,7 @@ module.exports = {
 }
 
 function buscarClientepf(callback) {
-    client.query(`SELECT * FROM ${tabela} WHERE pessoa_tipo = 'PF' `, callback);
+    client.query(`SELECT * from  ${tabela} WHERE  pessoa_tipo = 'PF'  order by pessoa_nome_raz `, callback);
 }
 function novoClientepf(req, res) {
     res.render('../app/views/novoClientepf.ejs');

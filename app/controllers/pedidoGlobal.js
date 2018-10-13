@@ -1,9 +1,12 @@
 var model = require('../models/pedidoGlobal.js'),
-produto = require('../models/produto.js'),
-condpag = require('../models/condpag.js'),
-clientepf = require('../models/clientepf.js'),
-clientepj = require('../models/clientepj.js'),
-fornecedor = require('../models/fornecedor.js');
+    itemPedidoGlobal = require("../models/itemPedGlobal"),
+    produto = require('../models/produto.js'),
+    estoqueEntrada = require("../models/estoqueEntrada"),
+    estoqueSaida = require("../models/estoqueSaida"),
+    condpag = require('../models/condpag.js'),
+    clientepf = require('../models/clientepf.js'),
+    clientepj = require('../models/clientepj.js'),
+    fornecedor = require('../models/fornecedor.js');
 
 module.exports = {
     buscarPedidoGlobal,
@@ -17,54 +20,138 @@ module.exports = {
 function buscarPedidoGlobal(req, res) {
     model.buscarPedidoGlobal((err, data) => {
         if (err)
-            return res.json(err);
-        res.render('../app/views/pedidoGlobal.ejs', { pedidoGlobal: data });
+            return res.status(500).json(err)
+
+        res.render('../app/views/pedidoGlobal/pedidoGlobal.ejs', { pedidoGlobal: data });
     })
 }
 
 function buscarPedidoGlobalPorId(req, res) {
     model.buscarPedidoGlobalPorId(req.params.codigo, (err, data) => {
         if (err)
-            return res.json(err);
-        res.render('../app/views/alteraPedidoGlobal.ejs', { pedidoGlobal: data[0], produto: produto, condpag: condpag, clientepf: clientepf, clientepj: clientepj, fornecedor: fornecedor});
+            return res.json(err)
+
+        estoqueEntrada.buscarEstoqueEntradaPorIdProduto(data[0].prod_codigo, (err, estoqueEntradaData) => {
+            if (err)
+                return res.status(500).json(err);
+
+            data[0].estoque = estoqueEntradaData.reduce((a, b) => a + b);
+            estoqueSaida.buscarEstoqueSaidaPorIdProduto(data[0].prod_codigo, (err, estoqueSaidaData) => {
+                if (err)
+                    return res.status(500).json(err);
+
+                produto.buscarProduto(null, (err, produtoData) => {
+                    if (err)
+                        return res.status(500).json(err)
+
+                    condpag.buscarCondpag((err, condPagData) => {
+                        if (err)
+                            return res.status(500).json(err)
+
+                        clientepf.buscarClientepf((err, clientepfData) => {
+                            if (err)
+                                return res.status(500).json(err)
+
+                            clientepj.buscarClientepj((err, clientepjData) => {
+                                if (err)
+                                    return res.status(500).json(err)
+
+                                fornecedor.buscarFornecedor((err, fornecedorData) => {
+                                    if (err)
+                                        return res.status(500).json(err)
+
+                                    var clientes = clientepfData.concat(clientepjData).concat(fornecedorData)
+                                    res.render('../app/views/pedidoGlobal/alteraPedidoGlobal.ejs', { pedidoGlobal: data, produto: produtoData, condpag: condPagData, clientepf: clientes });
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
     })
+
 }
 
 function novoPedidoGlobal(req, res) {
-    produto.buscarProduto((err, data) => {
+
+    produto.buscarProduto(null, (err, data) => {
         if (err)
-            return res.json(err);
-        res.render('../app/views/novoPedidoGlobal.ejs', { produto: data, condpag: condpag, clientepf: data, clientepj: data, fornecedor: data });
+            return res.status(500).json(err)
+
+        condpag.buscarCondpag((err, condPagData) => {
+            if (err)
+                return res.status(500).json(err)
+
+            clientepf.buscarClientepf((err, clientepfData) => {
+                if (err)
+                    return res.status(500).json(err)
+
+                clientepj.buscarClientepj((err, clientepjData) => {
+                    if (err)
+                        return res.status(500).json(err)
+                    fornecedor.buscarFornecedor((err, fornecedorData) => {
+                        if (err)
+                            return res.status(500).json(err)
+
+                        var clientes = clientepfData.concat(clientepjData).concat(fornecedorData)
+                        res.render('../app/views/pedidoGlobal/novoPedidoGlobal.ejs', { produto: data, condpag: condPagData, clientepf: clientes });
+                    })
+                })
+            })
+        })
+
     });
 }
 
 
-function cadastrarPedidoGlobal(req, res) {
-    model.cadastrarPedidoGlobal(req.body, (err, data) => {
-        if (err)
-            return res.json(err);
+async function cadastrarPedidoGlobal(req, res) {
+    try {
 
-        res.redirect('/pedidoGlobal');
-    });
+        var pedido = {
+            pedGlobal_data: req.body.pedGlobal_data,
+            pessoa_codigo: req.body.pessoa_codigo,
+            condpag_codigo: req.body.condpag_codigo,
+            totalPedGlobal: req.body.totalPedGlobal,
+            pedGlobal_dataVencimento: req.body.pedGlobal_dataVencimento
+        };
+
+        var pedidoGlobal = await model.cadastrarPedidoGlobal(pedido);
+
+        for (var i = 0; i < req.body.itens.length; i++) {
+            var item = {
+                pedGlobalCod: pedidoGlobal,
+                prod_codigo: req.body.itens[i].prod_codigo,
+                qtdePedGlobal: req.body.itens[i].qtdePedGlobal,
+                unitarioPedGlobal: req.body.itens[i].unitarioPedGlobal
+            };
+
+            await itemPedidoGlobal.cadastrarItemPedGlobal(item);
+        }
+
+        res.status(200);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
 }
 
 function alterarPedidoGlobal(req, res) {
     model.alterarPedidoGlobal(req.params.codigo, req.body, (err, data) => {
         if (err)
-            return res.json(err);
+            return res.status(500).json(err)
 
         res.redirect('/pedidoGlobal');
     });
 }
 
-
-
-function deletarPedidoGlobal(req, res) {
-    model.deletarPedidoGlobal(req.params.codigo, (err, data) => {
-        if (err)
-            return res.json(err);
-        res.redirect('/pedidoGlobal');
-    });
+async function deletarPedidoGlobal(req, res) {
+    try {
+        await itemPedidoGlobal.deletarItemPedGlobalPromise(req.params.codigo);
+        await model.deletarPedidoGlobal(req.params.codigo);
+        res.redirect(req.get('referer'));
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
 }
-
-

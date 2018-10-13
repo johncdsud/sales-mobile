@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <form action="/produto/novo" method="post">
+        <div class="container-fluid formulario">
+            <div class="form-group row">
+                <div class="col-md-5">
+                </div>
+                <h2 style="border-bottom: 1px #c5c5c5 solid;">Novo Produto</h2>
+            </div>
+            <br>
+            <div class="form-group row"style="display: flex;justify-content: center">               
+                <div class="col-md-3">
+                    <label for="nome">Nome</label>
+                    <input type="text" maxlength="20" class="form-control" id="nome" minlength="2" name="prod_nome"
+                        placeholder="Nome">
+                </div>
+                <div class="col-md-4">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" maxlength="20" class="form-control" id="descricao" name="prod_descricao"
+                        placeholder="Descrição">
+                </div>
+                <div class="col-md-2">
+                    <label for="tipo">Tipo Item</label>
+                    <select class="form-control custom-select" name="prod_tipo" id="tipo" placeholder="Tipo">
+                        <option>  Produto </option>
+                        <option>  Materia</option>
+                        <option>  Kit </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row"style="display: flex;justify-content: center">               
+                <div class="col-md-2">
+                    <label for="ncm">NCM</label>
+                    <select class="form-control custom-select" name="prod_ncm" id="ncm" placeholder="ncm">
+                        <% include ../partials/ncm %>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="custo">Custo</label>
+                    <input type="numeric" class="form-control" id="prod_custo" name="prod_custo" placeholder="Custo">
+                </div>
+                <div class="col-md-2">
+                    <label for="venda">Venda</label>
+                    <input type="numeric" class="form-control" id="prod_venda" name="prod_venda" placeholder="Venda">
+                </div>
+                <div class="col-md-3">
+                    <label for="tipo2">Tipo</label>
+                    <select class="form-control custom-select" name="prod_tipo2" id="prod_tipo2" placeholder="Tipo2">
+                        <option>  Serviços </option>
+                        <option>  Produto </option>
+                        <option>  Mercadoria </option>
+                        <option>  Material</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group row"style="display: flex;justify-content: center">              
+                <div class="col-md-2">
+                    <label for="unidade">Unidade</label>
+                    <select class="form-control custom-select" name="prod_unidade" id="prod_unidade" placeholder="Unidade">
+                        <option>Unidade</option>
+                        <option>Fardo</option>
+                        <option>Caixa</option>
+                        <option>Kit</option>
+                        <option>Par</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="marca_codigo">Marca</label>
+                    <select class="form-control custom-select" name="marca_codigo" id="marca_codigo">
+                        <% for (marca of marca){%>
+                        <option value="<%= marca.marca_codigo%>">
+                            <%= marca.marca_nome%>
+                        </option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <label for="produto">Ativo ? </label>
+                    <select class="form-control custom-select" name="prod_ativoinativo" id="ativoinativo">
+                        <option>Sim</option>
+                        <option>Não</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="produto">Movimenta Estoque? </label>
+                    <select class="form-control custom-select" name="prod_movestoque" id="movestoque">
+                        <option>Sim</option>
+                        <option>Não</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-12">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-12">
+                </div>
+            </div>
+            <div class="form-group row" style="display: flex;justify-content: center">                
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+                </div>
+                <div class="col-md-1">
+                    <a class="btn btn-secondary btn-block" href="/">Voltar</a>
+                </div>
+            </div>
+
+    </form>
+
+    <script src="/js/bootstrap/bootstrap.js"></script>
+</body>
+
+</html>

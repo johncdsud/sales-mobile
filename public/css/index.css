@@ -30,10 +30,6 @@ a:link{
 }
 a { color: inherit; } 
 
-body{
-	overflow-x: hidden;
-}
-
 input[type=number]::-webkit-inner-spin-button { 
 	-webkit-appearance: none;
 	cursor:pointer;
@@ -43,11 +39,17 @@ input[type=number]::-webkit-inner-spin-button {
 	text-align:center;
 	position:relative;
 }
+
 input[type=number] { 
 	-moz-appearance: textfield;
 	appearance: textfield;
 	margin: 0; 
 }
-.formulario{
+
+/* .formulario{
 	margin-left: 2%;
+} */
+
+body {
+	background-color: #E0F2F7;
 }

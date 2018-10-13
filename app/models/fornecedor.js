@@ -12,7 +12,7 @@ module.exports = {
 }
 
 function buscarFornecedor(callback) {
-    client.query(`SELECT * FROM ${tabela} WHERE pessoa_tipo = 'FORN' `, callback);
+    client.query(`SELECT * FROM ${tabela} WHERE pessoa_tipo = 'FORN' order by pessoa_nome_raz `, callback);
 }
 function novoFornecedor(req, res) {
     res.render('../app/views/novoFornecedor.ejs');

@@ -12,7 +12,7 @@ module.exports = {
 }
 
 function buscarMarca(callback) {
-    client.query(`SELECT * FROM ${tabela}`, callback);
+    client.query(`SELECT * FROM ${tabela} order by marca_nome`, callback);
 }
 function novaMarca(req, res) {
     res.render('../app/views/novaMarca.ejs');

@@ -1,4 +1,4 @@
-var model = require('../models/usuario.js');   
+var model = require('../models/usuario.js');
 
 module.exports = {
     buscarUsuario,
@@ -10,44 +10,47 @@ module.exports = {
 }
 
 function buscarUsuario(req, res) {
-    model.buscarUsuario((err, data) =>{
-        if (err) 
+    model.buscarUsuario((err, data) => {
+        if (err)
             return res.json(err);
-        res.render('../app/views/usuario.ejs', { usuario: data});
+
+        res.render('../app/views/usuario/usuario.ejs', { usuario: data });
     })
 }
 
-function buscarUsuarioPorId(req, res) {    
-    model.buscarUsuarioPorId(req.params.codigo, (err, data) =>{
-        if (err) 
+function buscarUsuarioPorId(req, res) {
+    model.buscarUsuarioPorId(req.params.codigo, (err, data) => {
+        if (err)
             return res.json(err);
-        res.render('../app/views/alteraUsuario.ejs', { user: data[0]});
+
+        res.render('../app/views/usuario/alteraUsuario.ejs', { user: data[0] });
     })
 }
 
 function novoUsuario(req, res) {
-    model.buscarUsuario((err,data) => {
+    model.buscarUsuario((err, data) => {
         if (err)
             return res.json(err);
-         res.render('../app/views/novoUsuario.ejs',{usuario: data});
+
+        res.render('../app/views/usuario/novoUsuario.ejs', { usuario: data });
     });
 }
 
 
 function cadastrarUsuario(req, res) {
-       model.cadastrarUsuario(req.body, (err, data) => {
-        if (err) 
+    model.cadastrarUsuario(req.body, (err, data) => {
+        if (err)
             return res.json(err);
-        
+
         res.redirect('/usuario');
     });
 }
 
 function alterarUsuario(req, res) {
-       model.alterarUsuario(req.params.codigo, req.body, (err, data) => {
-        if (err) 
+    model.alterarUsuario(req.params.codigo, req.body, (err, data) => {
+        if (err)
             return res.json(err);
-        
+
         res.redirect('/usuario');
     });
 }
@@ -55,10 +58,11 @@ function alterarUsuario(req, res) {
 
 
 function deletarUsuario(req, res) {
-       model.deletarUsuario(req.params.codigo, (err, data) => {
-        if (err) 
-            return res.json(err);        
-         res.redirect('/usuario');
+    model.deletarUsuario(req.params.codigo, (err, data) => {
+        if (err)
+            return res.json(err);
+
+        res.redirect('/usuario');
     });
 }
 

@@ -12,7 +12,7 @@ module.exports = {
 }
 
 function buscarClientepj(callback) {
-    client.query(`SELECT * FROM ${tabela} WHERE pessoa_tipo = 'PJ' `, callback);
+    client.query(`SELECT * FROM ${tabela} WHERE pessoa_tipo = 'PJ' order by pessoa_nome_raz`, callback);
 }
 function novoClientepj(req, res) {
     res.render('../app/views/novoClientepj.ejs');

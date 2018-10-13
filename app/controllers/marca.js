@@ -1,4 +1,4 @@
-var model = require('../models/marca.js');   
+var model = require('../models/marca.js');
 
 module.exports = {
     buscarMarca,
@@ -8,46 +8,49 @@ module.exports = {
     alterarMarca,
     deletarMarca
 }
-        
+
 function buscarMarca(req, res) {
-    model.buscarMarca((err, data) =>{
-        if (err) 
+    model.buscarMarca((err, data) => {
+        if (err)
             return res.json(err);
-        res.render('../app/views/marca.ejs', { marca: data});
+
+        res.render('../app/views/marca/marca.ejs', { marca: data });
     })
 }
 
-function buscarMarcaPorId(req, res) {    
-    model.buscarMarcaPorId(req.params.codigo, (err, data) =>{
-        if (err) 
+function buscarMarcaPorId(req, res) {
+    model.buscarMarcaPorId(req.params.codigo, (err, data) => {
+        if (err)
             return res.json(err);
-        res.render('../app/views/alteraMarca.ejs', { marca: data[0]});
+
+        res.render('../app/views/marca/alteraMarca.ejs', { marca: data[0] });
     })
 }
 
 function novaMarca(req, res) {
-    model.buscarMarca((err,data) => {
+    model.buscarMarca((err, data) => {
         if (err)
             return res.json(err);
-         res.render('../app/views/novaMarca.ejs',{marca: data});
+
+        res.render('../app/views/marca/novaMarca.ejs', { marca: data });
     });
 }
 
 
 function cadastrarMarca(req, res) {
-       model.cadastrarMarca(req.body, (err, data) => {
-        if (err) 
+    model.cadastrarMarca(req.body, (err, data) => {
+        if (err)
             return res.json(err);
-        
+
         res.redirect('/marca');
     });
 }
 
 function alterarMarca(req, res) {
-       model.alterarMarca(req.params.codigo, req.body, (err, data) => {
-        if (err) 
+    model.alterarMarca(req.params.codigo, req.body, (err, data) => {
+        if (err)
             return res.json(err);
-        
+
         res.redirect('/marca');
     });
 }
@@ -55,10 +58,11 @@ function alterarMarca(req, res) {
 
 
 function deletarMarca(req, res) {
-       model.deletarMarca(req.params.codigo, (err, data) => {
-        if (err) 
-            return res.json(err);        
-         res.redirect('/marca');
+    model.deletarMarca(req.params.codigo, (err, data) => {
+        if (err)
+            return res.json(err);
+
+        res.redirect('/marca');
     });
 }
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div class="container-fluid formulario" style="position:relative;left:09%">
+        <div class="form-group row">
+            <div class="col-md-4">
+            </div>
+            <h2 style="border-bottom: 1px #c5c5c5 solid;">Pedido de Venda</h2>
+        </div>
+    </div>
+    <style>
+        table#pedGlobaltabela thead {
+            position: fixed;
+
+        }
+    </style>
+    <div style="overflow: auto ; width: 600px;" class="container-fluid">
+        <table class="table table-striped table-dark table-sm" style="font-size: 15px">
+            <thead>
+                <tr>
+                    <th>Cod </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Data</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>                   
+                    <th>Cliente</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Alterar</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Deletar</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div style="overflow: auto; width: 600px; height: 440px; border:solid 1px" class="container-fluid">
+        <table class="table table-striped table-bordered" id="pedGlobaltabela">
+            <tbody>
+                <% for (ped of pedidoGlobal){%>
+                <tr>
+                    <td>
+                        <%= ped.pedGlobalCod%>
+                    </td>
+                    <td>
+                        <%= moment(ped.pedGlobal_data).format("DD/MM/YYYY")%>
+                    </td>
+                    <td>
+                        <%= ped.pessoa_nome_raz%>
+                    </td>
+
+                    <td><a class="btn btn-warning" href=<%="/pedidoGlobal/" + ped.pedGlobalCod%>>Alterar</a>
+                    </td>
+                    <td><a class="btn btn-danger" href=<%="/pedidoGlobal/excluir/" + ped.pedGlobalCod%>>Deletar</a>
+                    </td>
+
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script src="/js/bootstrap/bootstrap.js"></script>
+</body>
+
+</html>

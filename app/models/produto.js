@@ -11,8 +11,14 @@ module.exports = {
     deletarProduto
 }
 
-function buscarProduto(callback) {
-    client.query(`SELECT * FROM PRODUTO a INNER JOIN MARCA b ON a.marca_codigo =b.marca_codigo`, callback);
+function buscarProduto(codigos, callback) {
+    var where = '';
+
+    if(codigos) {
+        where = `WHERE a.marca_codigo in (${codigos})`;
+    }
+
+    client.query(`SELECT * FROM PRODUTO a INNER JOIN MARCA b ON a.marca_codigo = b.marca_codigo ${where} order by prod_nome`, callback);
 }
 function novoProduto(req, res) {
     res.render('../app/views/novoProduto.ejs');

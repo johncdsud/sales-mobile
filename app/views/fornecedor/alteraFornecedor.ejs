@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <form action="/fornecedor/alterar/<%=forn.pessoa_codigo%>" method="post">
+        <div class="container-fluid formulario">
+            <div class="form-group row" style="display: flex;justify-content: center">
+
+                <h2 style="border-bottom: 1px #c5c5c5 solid;">Alterar Fornecedor</h2>
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+
+            <div class="col-md-1">
+                <label for="fornecedor">Codigo</label>
+                <input type="text" maxlength="20" value="<%= forn.pessoa_codigo%>" name="pessoa_codigo" class="form-control"
+                    id="codigo" readonly>
+            </div>
+            <div class="col-md-1 ">
+                <label for="fornecedor">Tipo</label>
+                <select class="form-control custom-select" name="pessoa_tipo" id="tipo" readonly>
+                    <option>PJ</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="fornecedor">Razão Social</label>
+                <input type="text" maxlength="100" value="<%=forn.pessoa_nome_raz%>" name="pessoa_nome_raz" class="form-control"
+                    id="nome" placeholder="Informe a razão Social">
+            </div>
+            <div class="col-md-3 ">
+                <label for="fornecedor">Nome Fantasia</label>
+                <input type="text" maxlength="100 " value="<%= forn.pessoa_ape_fan%>" name="pessoa_ape_fan" class="form-control"
+                    id="fantasia" placeholder="Digite o nome fantasia">
+            </div>
+
+            <div class="col-md-3 ">
+                <label for="fornecedor">CNPJ</label>
+                <input type="number" maxlength="50" value="<%= forn.pessoa_cpf_cnpj%>" name="pessoa_cpf_cnpj" class="form-control "
+                    id="cnpj" placeholder="Informe o CNPJ">
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+
+            <div class="col-md-2 ">
+                <label for="fornecedor">I.E</label>
+                <input type="number" maxlength="50" value="<%= forn.pessoa_rg_ins%>" name="pessoa_rg_ins" class="form-control"
+                    id="ie" placeholder="Informe a I.E">
+            </div>
+            <div class="col-md-2 ">
+                <label for="fornecedor">Fone</label>
+                <input type="number" maxlength="30" value="<%= forn.pessoa_fone%>" name="pessoa_fone" class="form-control"
+                    id="fone" placeholder="Telefone">
+            </div>
+            <div class="col-md-2 ">
+                    <label for="fornecedor">Celular</label>
+                    <input type="number" maxlength="30" value="<%= forn.pessoa_cel%>" name="pessoa_cel" class="form-control"
+                        id="celular" placeholder="Celular">
+                </div>
+                <div class="col-md-2 ">
+                    <label for="fornecedor ">E-mail</label>
+                    <input type="email" maxlength="100" value="<%= forn.pessoa_email%>" name="pessoa_email" class="form-control"
+                        id="email" placeholder="Informe o E-mail">
+                </div>
+        </div>
+
+        <div class="form-group row" style="display: flex;justify-content: center">
+            
+            <div class="col-md-2 ">
+                <label for="fornecedor ">CEP</label>
+                <input type="number " maxlength="30" value="<%=forn.pessoa_cep%> " name="pessoa_cep" class="form-control"
+                    id="cep" placeholder="Digite o CEP">
+            </div>
+            <div class="col-md-3 ">
+                <label for="fornecedor ">Endereço</label>
+                <input type="text" maxlength="200" value="<%= forn.pessoa_end%> " name="pessoa_end" class="form-control"
+                    id="end" placeholder="Digite o endereço">
+            </div>
+            <div class="col-md-1 ">
+                <label for="fornecedor">Numero</label>
+                <input type="number" maxlength="10" value="<%=forn.pessoa_num%>" name="pessoa_num" class="form-control "
+                    id="num" placeholder="Numero ">
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+
+            <div class="col-md-2">
+                <label for="fornecedor ">Bairro</label>
+                <input type="text" maxlength="100" value="<%= forn.pessoa_bairro%>" name="pessoa_bairro" class="form-control "
+                    id="bairro" placeholder="Informe o bairro">
+            </div>
+            <div class="col-md-1 ">
+                <label for="fornecedor">Estado</label>
+                <select class="form-control custom-select " value="<%= forn.pessoa_uf%>" name="pessoa_uf" id="uf">
+                    <% include ../partials/estado %>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="fornecedor">Cidade</label>
+                <select class="form-control custom-select " value="<%= forn.pessoa_cidade%>" name="pessoa_cidade" id="cidade">
+                    <% include ../partials/cidades%>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row" style="display: flex;justify-content: center">
+
+            <div class="col-md-1 ">
+                <button type="submit " class="btn btn-primary btn-block ">Salvar</button>
+            </div>
+            <div class="col-md-1 ">
+                <a class="btn btn-secondary btn-block " href="/fornecedor">Voltar</a>
+            </div>
+        </div>
+
+    </form>
+
+    <script src="/js/bootstrap/bootstrap.js "></script>
+</body>
+
+</html>

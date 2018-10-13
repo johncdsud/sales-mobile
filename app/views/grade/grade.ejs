@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div class="container-fluid formulario">
+        <div class="form-group row" style="display: flex; justify-content: center">
+            <h2 style="border-bottom: 1px #c5c5c5 solid; display: flex; justify-content: center">Grades</h2>
+        </div>
+    </div>
+   
+    <div style="overflow: auto;  width: 650px;  " class="container-fluid">
+        <table class="table table-striped table-dark table-sm">
+            <tr>
+                <th>Cod</th>
+                <th>Descrição</th>
+                <th>Altera</th>
+                <th>Deleta</th>
+
+            </tr>
+            </thead>
+        </table>
+        </table>
+    </div>
+
+    <div style="overflow: auto; width: 650px; height: 300px; border:solid 1px " class="container-fluid">
+        <table class="table table-striped table-bordered" id="gradetabela">
+
+            <tbody>
+                <% for (grade of grade){%>
+
+                <tr>
+                    <td>
+                        <%= grade.grade_codigo%>
+                    </td>
+                    <td>
+                        <%= grade.grade_descricao%>
+                    </td>
+
+                    <td><a class="btn btn-warning" href=<%="/grade/" + grade.grade_codigo%>>Alterar</a> </td>
+                    <td><a class="btn btn-danger" href=<%="/grade/excluir/" + grade.grade_codigo%>>Deletar</a>
+                    </td>
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/js/bootstrap/bootstrap.js"></script>
+</body>
+
+</html>
