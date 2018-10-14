@@ -15,6 +15,9 @@
             </div>
             <h2 style=" border-bottom: 1px #c5c5c5 solid; position:relative;left:02%">Fornecedores</h2>
         </div>
+        <button style="display: block; margin: auto; margin-bottom: 5px;" class="btn btn-primary" onclick="gerarRelatorio('FORN', 'pessoa')">
+            Relatorio
+        </button>
     </div>
     <style>
         table#fornecedorestabela thead {
@@ -31,21 +34,16 @@
                     <th>Razão Social</th>
                     <th></th>
                     <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th></th>                  
                     <th>Fantasia</th>
                     <th></th>
                     <th>E-mail</th>
                     <th></th>
                     <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>                  
+                    <th></th>                                  
                     <th>Fone</th>
                     <th></th>
-                    <th>Altera</th>
-                    <th>Relatorio</th>
+                    <th>Altera</th>                   
                     <th>Deleta</th>
                     <th></th>
                     <th></th>
@@ -79,8 +77,7 @@
 
                 <td><a class="btn btn-warning" href=<%="/fornecedor/" + forn.pessoa_codigo%>>Alterar</a>
                 </td>
-                <td><a class="btn btn-primary" onclick="gerarRelatorio('<%= forn.pessoa_codigo%>', 'pessoa')">Relatorio</a>
-                </td>
+                
                 <td><a class="btn btn-danger" href=<%="/fornecedor/excluir/" + forn.pessoa_codigo%>>Deletar</a>
                 </td>
 

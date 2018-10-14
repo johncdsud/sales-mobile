@@ -16,6 +16,9 @@
             </div>
             <h2 style=" border-bottom: 1px #c5c5c5 solid; position:relative;left:02%">Clientes P.F</h2>
         </div>
+        <button style="display: block; margin: auto; margin-bottom: 5px;" class="btn btn-primary" onclick="gerarRelatorio('PF', 'pessoa')">
+            Relatorio
+        </button>
     </div>
     <style>
         table#clientetabela thead {
@@ -33,12 +36,8 @@
             <thead>
                 <tr>
                     <th>Cod</th>
-                    <th>Nome</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Nome</th>                
+                  
                     <th></th>
                     <th></th>
                     <th></th>
@@ -56,10 +55,7 @@
                     <th>Celular</th>
                     <th></th>
                     <th></th>
-                    <th>Altera</th>
-                    <th></th>
-                    <th>Relatorio</th>
-                    <th></th>
+                    <th>Altera</th>                    
                     <th>Deleta</th>
                     <th></th>
                     <th></th>
@@ -94,8 +90,7 @@
                     </td>
 
                     <td><a class="btn btn-warning" href=<%="/clientepf/" + pf.pessoa_codigo%>>Alterar</a>
-                    </td>
-                    <td><a class="btn btn-primary" onclick="gerarRelatorio('<%= pf.pessoa_codigo%>', 'pessoa')">Relatorio</a>
+                    </td>                    
                     </td>
                     <td><a class="btn btn-danger" href=<%="/clientepf/excluir/" + pf.pessoa_codigo%>>Deletar</a>
                     </td>
