@@ -34,7 +34,7 @@
                     <th>Data</th>
                     <th></th>
                     <th></th>
-                    <th></th>                   
+                    <th></th>
                     <th>Cliente</th>
                     <th></th>
                     <th></th>
@@ -43,10 +43,11 @@
                     <th></th>
                     <th></th>
                     <th></th>
+                    <th>Relatorio</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                     <th>Deletar</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
                 </tr>
             </thead>
         </table>
@@ -67,7 +68,7 @@
                     </td>
 
                     <td><a class="btn btn-warning" href=<%="/pedidoGlobal/" + ped.pedGlobalCod%>>Alterar</a>
-                    </td>
+                    <td><a class="btn btn-primary" onclick="gerarRelatorio('<%= ped.pedGlobalCod %>', 'pedidoVenda')">Relatorio</a>
                     <td><a class="btn btn-danger" href=<%="/pedidoGlobal/excluir/" + ped.pedGlobalCod%>>Deletar</a>
                     </td>
 
@@ -79,6 +80,7 @@
     </div>
 
     <script src="/js/bootstrap/bootstrap.js"></script>
+    <script src="/js/relatorio/relatorio.js"></script>
 </body>
 
 </html>

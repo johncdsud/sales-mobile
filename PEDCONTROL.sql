@@ -228,7 +228,6 @@ INSERT INTO PESSOA (pessoa_nome_raz, pessoa_tipo, pessoa_ape_fan, pessoa_cpf_cnp
 create table GRADE(
 	grade_codigo int primary key AUTO_INCREMENT not null ,
     grade_descricao varchar(70),
-    grade_numeracao varchar(300),
     grade_ativoinativo varchar(10)
 ) ;
 
@@ -242,8 +241,8 @@ create table ITEMGRADE(
 -- Fazendo dump de dados para tabela `GRADE`
 --
 INSERT INTO GRADE(grade_descricao, grade_numeracao, grade_ativoinativo) VALUES
-('Feminina', '33-34-35-36-37','Sim'),
-('Masculina','38-39-40-41-42-43-44','Sim');
+('Feminina', 'Sim'),
+('Masculina', 'Sim');
 --
 
 -- Estrutura para tabela `MOVIMENTO DE ESTOQUE - MOVEST`

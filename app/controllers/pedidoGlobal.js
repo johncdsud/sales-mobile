@@ -35,7 +35,7 @@ function buscarPedidoGlobalPorId(req, res) {
             if (err)
                 return res.status(500).json(err);
 
-            data[0].estoque = estoqueEntradaData.reduce((a, b) => a + b);
+            // data[0].estoque = estoqueEntradaData.reduce((a, b) => a + b);
             estoqueSaida.buscarEstoqueSaidaPorIdProduto(data[0].prod_codigo, (err, estoqueSaidaData) => {
                 if (err)
                     return res.status(500).json(err);
@@ -129,7 +129,7 @@ async function cadastrarPedidoGlobal(req, res) {
             await itemPedidoGlobal.cadastrarItemPedGlobal(item);
         }
 
-        res.status(200);
+        res.status(200).end();
     }
     catch (err) {
         res.status(500).json(err);

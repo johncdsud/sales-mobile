@@ -22,8 +22,13 @@
             <tr>
                 <th>N°</th>
                 <th>Cliente</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
                 <th>Data Pedido</th>
                 <th>Altera</th>
+                <th>Relatorio</th>
                 <th>Deleta</th>
             </tr>
             </thead>
@@ -51,6 +56,7 @@
                         <%= moment(pedidoCalcadista.dataped).format('DD/MM/YYYY')%>
                     </td>
                     <td><a class="btn btn-warning" href=<%="/pedidoCalcadista/" + pedidoCalcadista.pedcalc_codigo%>>Alterar</a> </td>
+                    <td><a class="btn btn-primary" onclick="gerarRelatorio('<%= pedidoCalcadista.pedcalc_codigo%>', 'pedidoGrade')">Relatorio</a>
                     <td><a class="btn btn-danger" href=<%="/pedidoCalcadista/excluir/" + pedidoCalcadista.pedcalc_codigo%>>Deletar</a>
                     </td>
                     </tr>
@@ -60,6 +66,7 @@
     </div>
 
     <script src="/js/bootstrap/bootstrap.js"></script>
+    <script src="/js/relatorio/relatorio.js"></script>
 </body>
 
 </html>

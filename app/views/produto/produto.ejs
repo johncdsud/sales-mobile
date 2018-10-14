@@ -13,8 +13,11 @@
         <div class="form-group row">
             <div class="col-md-5">
             </div>
-            <h2 style=" border-bottom: 1px #c5c5c5 solid; position:relative;left:03%">Produtos</h2>
+            <h2 style=" border-bottom: 1px #c5c5c5 solid; position: relative;left:03%">Produtos</h2>
         </div>
+        <button style="display: block; margin: auto; margin-bottom: 5px;" class="btn btn-primary" onclick="gerarRelatorio(null, 'produto')">
+            Relatorio
+        </button>
     </div>
     <style>
         table#produtotabela thead {
@@ -45,7 +48,7 @@
                     <th>R$.V</th>
                     <th>Marca</th>
                     <th>Alterar</th>
-                    <th></th>  
+                    <th>Relatorio</th>  
                     <th>Deletar</th>
                     <th></th>  
                     <th></th>  
@@ -87,6 +90,7 @@
 
 
     <script src="/js/bootstrap/bootstrap.js"></script>
+    <script src="/js/relatorio/relatorio.js"></script>
 </body>
 
 </html>
