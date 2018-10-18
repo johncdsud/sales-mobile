@@ -14,9 +14,13 @@
         <div class="form-group row" style="display: flex; justify-content: center">
             <h2 style="border-bottom: 1px #c5c5c5 solid; display: flex; justify-content: center">Grades</h2>
         </div>
+        <button style="display: block; margin: auto; margin-bottom: 5px;" class="btn btn-primary" onclick="gerarRelatorio(null, 'grade')">
+            Relatório
+        </button>
+        <br>
     </div>
-   
-    <div style="overflow: auto;  width: 650px;  " class="container-fluid">
+
+    <div style="overflow: auto;  width: 550px;  " class="container-fluid">
         <table class="table table-striped table-dark table-sm">
             <tr>
                 <th>Cod</th>
@@ -30,7 +34,7 @@
         </table>
     </div>
 
-    <div style="overflow: auto; width: 650px; height: 300px; border:solid 1px " class="container-fluid">
+    <div style="overflow: auto; width: 520px; height: 350px; border:solid 1px " class="container-fluid">
         <table class="table table-striped table-bordered" id="gradetabela">
 
             <tbody>
@@ -54,6 +58,7 @@
     </div>
 
     <script src="/js/bootstrap/bootstrap.js"></script>
+    <script src="/js/relatorio/relatorio.js"></script>
 </body>
 
 </html>

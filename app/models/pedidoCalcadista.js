@@ -11,14 +11,14 @@ module.exports = {
 }
 
 function buscarPedidoCalcadista(callback) {
-    client.query(`SELECT * FROM PEDIDOCALCADO a INNER JOIN PESSOA b ON a.pessoa_codigo = b.pessoa_codigo ` ,callback);
+    client.query(`SELECT * FROM PEDIDOCALCADO a INNER JOIN PESSOA b ON a.pessoa_codigo = b.pessoa_codigo `, callback);
 }
 
 function buscarPedidoCalcadistaPorId(id, callback) {
     //buscando o pedido 
     var mysql = `SELECT * FROM ${tabela} p INNER JOIN PESSOA pes ON pes.pessoa_codigo = p.pessoa_codigo INNER JOIN CONDPAG c ON c.condpag_codigo = p.condpag_codigo`;
     client.query(mysql, (err, data) => {
-        if(err)
+        if (err)
             return callback(err);
 
         var pedidoCalcadista = data[0];
@@ -27,12 +27,12 @@ function buscarPedidoCalcadistaPorId(id, callback) {
         //buscando os itens do pedido
         mysql = `SELECT * FROM ${tabela2} i INNER JOIN PRODUTO p ON p.prod_codigo = i.prod_codigo INNER JOIN GRADE g ON g.grade_codigo = i.cod_grade WHERE pedcalc_codigo = ${id}`;
         client.query(mysql, (err, itens) => {
-            if(err)
+            if (err)
                 return callback(err);
 
             pedidoCalcadista.itens = itens;
 
-            if(!itens || !itens.length)
+            if (!itens || !itens.length)
                 return callback(null, pedidoCalcadista);
 
             //buscando as grades dos itens
@@ -42,12 +42,12 @@ function buscarPedidoCalcadistaPorId(id, callback) {
 
                 mysql = `SELECT * FROM item_ped_grad WHERE item_pedcalc_cod = ${item.item_pedcalc_cod}`;
                 client.query(mysql, (err, itensPedGrade) => {
-                    if(err)
+                    if (err)
                         return callback(err);
 
                     pedidoCalcadista.itens[i].itensPedGrade = itensPedGrade;
 
-                    if(i == itens.length - 1) {
+                    if (i == itens.length - 1) {
                         callback(null, pedidoCalcadista);
                     }
                 })
@@ -56,10 +56,10 @@ function buscarPedidoCalcadistaPorId(id, callback) {
     });
 }
 
-async function cadastrarPedidoCalcadista(PEDIDOGLOBAL) {
+async function cadastrarPedidoCalcadista(PEDIDOCALCADO) {
     return new Promise((resolve, reject) => {
         var mysql = `INSERT INTO ${tabela} SET ?`;
-        client.query(mysql, PEDIDOGLOBAL, (err, data) => {
+        client.query(mysql, PEDIDOCALCADO, (err, data) => {
             if (err)
                 return reject(err);
 
@@ -78,7 +78,7 @@ async function alterarPedidoCalcadista(id, PEDIDOCALCADO) {
     return new Promise((resolve, reject) => {
         var mysql = `UPDATE ${tabela} SET dataped ='${PEDIDOCALCADO.dataped}', data_entrega ='${PEDIDOCALCADO.data_entrega}', pessoa_codigo ='${PEDIDOCALCADO.pessoa_codigo}', condpag_codigo ='${PEDIDOCALCADO.condpag_codigo}' WHERE pedcalc_codigo = ${id}`;
         client.query(mysql, (err, data) => {
-            if(err)
+            if (err)
                 return reject(err);
 
             resolve();
@@ -86,6 +86,26 @@ async function alterarPedidoCalcadista(id, PEDIDOCALCADO) {
     });
 }
 
-function deletarPedidoCalcadista(id, callback) {
-    client.query(`DELETE FROM ${tabela} WHERE pedcalc_codigo = ${id}`, callback);
+async function deletarPedidoCalcadista(id) {
+    return new Promise((resolve, reject) => {
+        var mysql = `DELETE FROM ITEM_PED_GRAD WHERE item_pedcalc_cod in (SELECT item_pedcalc_cod FROM item_pedcalc WHERE pedcalc_codigo = ${id})`;
+        client.query(mysql, (err) => {
+            if (err)
+                return reject(err);
+
+            mysql = `DELETE FROM item_pedcalc WHERE pedcalc_codigo = ${id}`;
+            client.query(mysql, (err) => {
+                if (err)
+                    return reject(err);
+
+                mysql = `DELETE FROM ${tabela} WHERE pedcalc_codigo = ${id}`;
+                client.query(mysql, (err) => {
+                    if (err)
+                        return reject(err);
+
+                    resolve();
+                });
+            });
+        });
+    });
 }

@@ -44,8 +44,8 @@ create table PRODUTO(
 	prod_ativoinativo varchar(5) ,    
     prod_movestoque varchar(5) ,
     prod_ncm varchar(400),
-    prod_custo decimal(5,2),
-    prod_venda decimal(5,2),
+    prod_custo decimal(7,2),
+    prod_venda decimal(7,2),
     prod_tipo2 varchar(30),
     prod_unidade varchar(30),    
     marca_codigo int,
@@ -53,6 +53,7 @@ create table PRODUTO(
 ) ; 
 
 alter table PRODUTO alter column prod_ativoinativo set default 'Não';
+alter table PRODUTO alter column prod_movestoque set default 'Não';
 alter table PRODUTO alter column prod_movestoque set default 'Não';
 --
 -- Fazendo dump de dados para tabela `PRODUTO`
@@ -237,17 +238,12 @@ create table ITEMGRADE(
     constraint FK_GRADE_CODIGO foreign key (grade_codigo) references GRADE (grade_codigo),
     grade_tamanho char(2) not null
 );
---
--- Fazendo dump de dados para tabela `GRADE`
---
-INSERT INTO GRADE(grade_descricao, grade_numeracao, grade_ativoinativo) VALUES
-('Feminina', 'Sim'),
-('Masculina', 'Sim');
---
+
+-
 
 -- Estrutura para tabela `MOVIMENTO DE ESTOQUE - MOVEST`
 --
-select movest_codigo from movestoque;
+
 create table MOVESTOQUE(
 	movest_codigo int primary key AUTO_INCREMENT not null,
     movest_motivo varchar(20),
@@ -300,6 +296,8 @@ create table EMPRESA(
     emp_favorecido varchar(100)
     
 ) ;
+
+
 --
 -- Fazendo dump de dados para tabela `EMPRESA`
 --
@@ -371,7 +369,7 @@ create table PEDIDOGLOBAL(
     pedGlobal_dataVencimento date not null
 ) ;
   
-
+select * from PEDIDOGLOBAL where pedGlobal_data  between  '2018-10-02'  and  '2018-10-03';
 
 create table ITEMPEDGLOBAL(
 	itemPedGlobal_cod int primary key auto_increment not null,
@@ -392,7 +390,7 @@ create table PEDIDOCALCADO(
     condpag_codigo int not null,
     constraint FK_PED_PEDLAT2_CONDPAG foreign key(condpag_codigo)references CONDPAG(condpag_codigo),
     
-    condpag_codigo int,
+    pessoa_codigo int,
     constraint FK_PESSOA foreign key(pessoa_codigo)references PESSOA(pessoa_codigo)
 );
 

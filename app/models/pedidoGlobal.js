@@ -38,7 +38,7 @@ function novoPedidoGlobal(req, res) {
 }
 
 function buscarPedidoGlobalPorId(id, callback) {   
-    client.query(`SELECT * FROM ${tabela1} pg INNER JOIN PESSOA pes ON pg.pessoa_codigo = pes.pessoa_codigo LEFT JOIN ${tabela2} item ON pg.pedGlobalCod = item.pedGlobalCod LEFT JOIN PRODUTO prod ON prod.prod_codigo = item.prod_codigo INNER JOIN CONDPAG cond ON cond.condpag_codigo = pg.condpag_codigo WHERE pg.pedGlobalCod = ${id}`, callback);
+    client.query(`SELECT * FROM ${tabela1} pg INNER JOIN PESSOA pes ON pg.pessoa_codigo = pes.pessoa_codigo INNER JOIN CONDPAG cond ON cond.condpag_codigo = pg.condpag_codigo WHERE pg.pedGlobalCod = ${id}`, callback);
 }
 
 

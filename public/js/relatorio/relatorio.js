@@ -1,4 +1,4 @@
-function gerarRelatorio(id, route) {
+function gerarRelatorio(id, route, method, params) {
     var url;
 
     if(!id || id == null)
@@ -7,7 +7,7 @@ function gerarRelatorio(id, route) {
         url = `http://${window.location.hostname}:3001/api/relatorio/${route}/${id}`;
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
+    xhr.open(method || 'GET', url, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -21,5 +21,5 @@ function gerarRelatorio(id, route) {
         }
     };
 
-    xhr.send();
+    xhr.send(JSON.stringify(params));
 }

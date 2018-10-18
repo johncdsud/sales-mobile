@@ -44,6 +44,3 @@ function alterarProduto(id, PRODUTO, callback) {
 function deletarProduto(id, callback) {
     client.query(`DELETE FROM ${tabela} WHERE prod_codigo = ${id}`, callback);
 }
-
-
-

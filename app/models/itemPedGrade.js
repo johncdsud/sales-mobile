@@ -4,6 +4,7 @@ var tabela = "ITEM_PED_GRAD";
 module.exports = {
     buscarItensGradePorItemPedCalcCodigo,
     cadastrarItemPedidoGrade,
+    deletarItemGradePromise
 }
 
 async function buscarItensGradePorItemPedCalcCodigo(id, callback) {
@@ -23,6 +24,16 @@ async function cadastrarItemPedidoGrade(item) {
             if (err)
                 return reject(err);
 
+            resolve();
+        });
+    })
+}
+async function deletarItemGradePromise(codigo_item_pg) {
+    return new Promise((resolve, reject) => {
+        client.query(`DELETE FROM ${tabela} WHERE item_pedcalc_cod = ${codigo_item_pg}`, (err) => {
+            if(err)
+                return reject(err);
+    
             resolve();
         });
     })

@@ -1,5 +1,10 @@
 var $ = document.getElementById.bind(document);
 
+// buscando o estoque ao entrar na tela
+window.onload = function() {
+    buscarEstoque();
+}
+
 var pedido_global_codigo = $('pedido-global-codigo').textContent;
 
 function incluirItem() {
@@ -96,4 +101,35 @@ function alteraDataVencimento() {
 
 function imprimirSaida() {
     window.print();
+}
+
+function buscarEstoque() {
+    var prodSelect = $('prod_codigo');
+    var id = prodSelect.options[prodSelect.selectedIndex].value;
+    
+    var url = `${window.location.origin}/estoque/produto/${id}`;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var estoque = JSON.parse(xhr.responseText);
+                atualizaEstoque(estoque);
+            }
+            else {
+                alert("Ocorreu um erro ao buscar o estoque do produto");
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+function atualizaEstoque(estq) {
+    $('qtdePedGlobal').value = estq;
+}
+
+function getEstoque() {
+    return +$('qtdePedGlobal').value;
 }

@@ -7,6 +7,7 @@ module.exports = (app) => {
     app.get('/produto/:codigo', controller.buscarProdutoPorId);
     app.post('/produto/alterar/:codigo', controller.alterarProduto);
     app.get('/produto/excluir/:codigo', controller.deletarProduto);
+    app.get('/estoque/produto/:codigo', controller.buscarEstoqueProduto);
 }
 
 

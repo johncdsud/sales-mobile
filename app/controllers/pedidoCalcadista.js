@@ -151,17 +151,25 @@ async function alterarPedidoCalcadista(req, res) {
         await model.alterarPedidoCalcadista(req.params.codigo, pedido);
         res.status(200).end();
     }
-    catch(ex) {
+    catch (ex) {
         res.status(500).json(ex);
     }
 }
 
-function deletarPedidoCalcadista(req, res) {
-    model.deletarPedidoCalcadista(req.params.codigo, (err, data) => {
-        if (err)
-            return res.json(err);
-        res.redirect('/pedidoCalcadista');
-    });
+// function deletarPedidoCalcadista(req, res) {
+//     model.deletarPedidoCalcadista(req.params.codigo, (err, data) => {
+//         if (err)
+//             return res.json(err);
+//         res.redirect('/pedidoCalcadista');
+//     });
+// }
+
+async function deletarPedidoCalcadista(req, res) {
+    try {
+        await model.deletarPedidoCalcadista(req.params.codigo);
+        res.redirect(req.get('referer'));
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
 }
-
-

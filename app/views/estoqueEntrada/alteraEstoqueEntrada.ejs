@@ -24,15 +24,13 @@
         </div>
 
         <div class="form-group row" style="display: flex;justify-content: center">
-
-
             <div class="col-md-1">
                 <label for="pedido">Pedido</label>
                 <input type="number" maxlength="200" class="form-control" id="pedido" name="movest_pedido" placeholder="Nº"
                     readonly value="<%= movestoque[0].movest_pedido%>">
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="prod_codigo">Produto</label>
                 <select class="form-control custom-select" name="prod_codigo" id="prod_codigo">
                     <% for (prod of produto){%>
@@ -61,14 +59,11 @@
             </div>
             <div class="col-md-1">
                 <a class="btn btn-success btn-block" onclick="salvar()">Salvar</a>
-            </div>
-            <div class="col-md-1">
-                <a class="btn btn-warning btn-block" onclick="imprimir()">Imprimir</a>
-            </div>
+            </div>            
         </div>
 
 
-        <div style="overflow: auto; width: 700px; height: 300px; border: 1px" class="container-fluid">
+        <div style="overflow: auto; width: 700px; height: 250px; border: 1px" class="container-fluid">
             <table class="table table-striped table-ligth table-bordered">
                 <thead>
                     <tr>

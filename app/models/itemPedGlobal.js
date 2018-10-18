@@ -9,7 +9,9 @@ module.exports = {
     cadastrarItemPedGlobal,
     alterarItemPedGlobal,
     deletarItemPedGlobal,
-    deletarItemPedGlobalPromise
+    deletarItemPedGlobalPromise,
+    buscarItemPedGlobalPorProduto,
+    buscarItemPedGlobalPorPedido
 }
 
 function buscarItemPedGlobal(callback) {
@@ -73,4 +75,12 @@ async function deletarItemPedGlobalPromise(pedGlobalCod) {
             resolve();
         });
     })
+}
+
+function buscarItemPedGlobalPorProduto(codigo, callback) {
+    client.query(`SELECT * FROM ${tabela} WHERE prod_codigo = ${codigo}`, callback);   
+}
+
+function buscarItemPedGlobalPorPedido(id, callback) {
+    client.query(`SELECT * FROM ${tabela} a INNER JOIN PRODUTO b ON a.prod_codigo = b.prod_codigo WHERE a.pedGlobalCod = ${id}`, callback);
 }

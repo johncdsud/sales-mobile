@@ -28,7 +28,7 @@ function cadastrarUsuario(USUARIO, callback) {
 }
 
 function alterarUsuario(id, USUARIO, callback) {
-    var mysql = `UPDATE  ${tabela} SET user_nome = '${USUARIO.user_nome}', user_usuario ='${USUARIO.user_usuario}', user_senha ='${USUARIO.user_senha}', user_email ='${USUARIO.user_email}', user_celular ='${USUARIO.user_celular}', user_codcelular ='${USUARIO.user_codcelular}'WHERE user_codigo = ${id}`;
+    var mysql = `UPDATE  ${tabela} SET user_nome = '${USUARIO.user_nome}', user_usuario ='${USUARIO.user_usuario}', user_senha ='${USUARIO.user_senha}', user_email ='${USUARIO.user_email}'WHERE user_codigo = ${id}`;
     client.query(mysql, callback);
 }
 

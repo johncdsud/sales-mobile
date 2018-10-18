@@ -1,6 +1,8 @@
 var model = require('../models/produto.js'),
-    marca = require('../models/marca.js');
-
+    marca = require('../models/marca.js'),
+    estoqueEntrada = require("../models/estoqueEntrada"),
+    estoqueSaida = require("../models/estoqueSaida"),
+    itemPedidoGlobal = require("../models/itemPedGlobal");
 
 module.exports = {
     buscarProduto,
@@ -8,7 +10,8 @@ module.exports = {
     novoProduto,
     cadastrarProduto,
     alterarProduto,
-    deletarProduto
+    deletarProduto,
+    buscarEstoqueProduto
 }
 
 function buscarProduto(req, res) {
@@ -34,8 +37,6 @@ function buscarProdutoPorId(req, res) {
     });
 }
 
-
-
 function novoProduto(req, res) {
     marca.buscarMarca((err, data) => {
         if (err)
@@ -44,7 +45,6 @@ function novoProduto(req, res) {
         res.render('../app/views/produto/novoProduto.ejs', { marca: data });
     });
 }
-
 
 function cadastrarProduto(req, res) {
     model.cadastrarProduto(req.body, (err, data) => {
@@ -73,4 +73,35 @@ function deletarProduto(req, res) {
     });
 }
 
+function buscarEstoqueProduto(req, res) {
+    let estoque = 0;
 
+    estoqueEntrada.buscarEstoqueEntradaPorIdProduto(req.params.codigo, (err, entrada) => {
+        if (err)
+            return res.status(500).json(err);
+
+        entrada.forEach(item => {
+            estoque += item.qtde;
+        });
+
+        estoqueSaida.buscarEstoqueSaidaPorIdProduto(req.params.codigo, (err, saida) => {
+            if (err)
+                return res.status(500).json(err);
+
+            saida.forEach(item => {
+                estoque -= item.qtde;
+            });
+
+            itemPedidoGlobal.buscarItemPedGlobalPorProduto(req.params.codigo, (err, itens) => {
+                if (err)
+                    return res.status(500).json(err);
+
+                itens.forEach(item => {
+                    estoque -= +item.qtdePedGlobal;
+                });
+
+                res.status(200).json(estoque);
+            });
+        });
+    });
+}

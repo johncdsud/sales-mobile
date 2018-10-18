@@ -37,7 +37,7 @@ function buscarEstoqueSaidaPorId(req, res) {
                 item.movest_dataent = moment(item.movest_dataent).format("DD/MM/YYYY");
             });
 
-            res.render('../app/views/aestoqueSaida/lteraEstoqueSaida.ejs', { movestoque: data, produto: produtos });
+            res.render('../app/views/estoqueSaida/alteraEstoqueSaida.ejs', { movestoque: data, produto: produtos });
         });
     });
 }

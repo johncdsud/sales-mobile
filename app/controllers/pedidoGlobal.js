@@ -1,8 +1,6 @@
 var model = require('../models/pedidoGlobal.js'),
     itemPedidoGlobal = require("../models/itemPedGlobal"),
     produto = require('../models/produto.js'),
-    estoqueEntrada = require("../models/estoqueEntrada"),
-    estoqueSaida = require("../models/estoqueSaida"),
     condpag = require('../models/condpag.js'),
     clientepf = require('../models/clientepf.js'),
     clientepj = require('../models/clientepj.js'),
@@ -29,40 +27,36 @@ function buscarPedidoGlobal(req, res) {
 function buscarPedidoGlobalPorId(req, res) {
     model.buscarPedidoGlobalPorId(req.params.codigo, (err, data) => {
         if (err)
-            return res.json(err)
+            return res.status(500).json(err);
 
-        estoqueEntrada.buscarEstoqueEntradaPorIdProduto(data[0].prod_codigo, (err, estoqueEntradaData) => {
+        data = data[0];
+        itemPedidoGlobal.buscarItemPedGlobalPorPedido(req.params.codigo, (err, itens) => {
             if (err)
                 return res.status(500).json(err);
 
-            // data[0].estoque = estoqueEntradaData.reduce((a, b) => a + b);
-            estoqueSaida.buscarEstoqueSaidaPorIdProduto(data[0].prod_codigo, (err, estoqueSaidaData) => {
+            data.itens = itens;
+            produto.buscarProduto(null, (err, produtoData) => {
                 if (err)
-                    return res.status(500).json(err);
+                    return res.status(500).json(err)
 
-                produto.buscarProduto(null, (err, produtoData) => {
+                condpag.buscarCondpag((err, condPagData) => {
                     if (err)
                         return res.status(500).json(err)
 
-                    condpag.buscarCondpag((err, condPagData) => {
+                    clientepf.buscarClientepf((err, clientepfData) => {
                         if (err)
                             return res.status(500).json(err)
 
-                        clientepf.buscarClientepf((err, clientepfData) => {
+                        clientepj.buscarClientepj((err, clientepjData) => {
                             if (err)
                                 return res.status(500).json(err)
 
-                            clientepj.buscarClientepj((err, clientepjData) => {
+                            fornecedor.buscarFornecedor((err, fornecedorData) => {
                                 if (err)
                                     return res.status(500).json(err)
 
-                                fornecedor.buscarFornecedor((err, fornecedorData) => {
-                                    if (err)
-                                        return res.status(500).json(err)
-
-                                    var clientes = clientepfData.concat(clientepjData).concat(fornecedorData)
-                                    res.render('../app/views/pedidoGlobal/alteraPedidoGlobal.ejs', { pedidoGlobal: data, produto: produtoData, condpag: condPagData, clientepf: clientes });
-                                })
+                                var clientes = clientepfData.concat(clientepjData).concat(fornecedorData)
+                                res.render('../app/views/pedidoGlobal/alteraPedidoGlobal.ejs', { pedidoGlobal: data, produto: produtoData, condpag: condPagData, clientepf: clientes });
                             })
                         })
                     })
@@ -70,7 +64,6 @@ function buscarPedidoGlobalPorId(req, res) {
             })
         })
     })
-
 }
 
 function novoPedidoGlobal(req, res) {
